@@ -15,3 +15,12 @@ Langkah-langkah:
 1. Memodifikasi file `src/components/LoginOrRegisterForm.jsx` untuk dapat melakukan login dan register
 1. Memodifikasi file `src/components/NavBar.jsx` untuk dapat melakukan signout
 1. Memodifikasi file `App.js` untuk menggunakan proteksi route berdasarkan kondisi user apakah sedang ada yang login atau tidak
+
+Pada bagian ini, kita akan menambahkan ProtectedRoutes sehingga membuat kode kita menjadi lebih DRY dan kita ingin menampilkan email dari user yang sedang login pada halaman utama kita !
+
+Langkah-langkah:
+1. Membuat sebuah file baru dengan nama `src/components/ProtectedComponent.jsx` (Component ini akan menjadi HOC + Logic untuk proteksi rute)
+1. Memodifikasi file `ProtectedComponents.jsx` untuk menambahkan logic proteksi rute dan untuk mengembalikan component children yang digunakan
+1. Memodifikasi file `App.js` untuk menghapuskan logic yang digunakan untuk proteksi rute
+1. Menambahkan ProtectedComponent dan penggunaannya pada `index.js`
+1. Sampai di tahap ini proteksi sudah selesai ! Selanjutnya kita cukup memodifikasi halaman `HomePage.jsx` untuk bisa menampilkan nama dari user dengan menggunakan.... `useAuthState` dan `auth` dari `authentication/firebase.js` lagi !
