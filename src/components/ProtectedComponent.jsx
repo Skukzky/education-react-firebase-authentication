@@ -1,4 +1,7 @@
-import React from "react";
+// Sekarang pada ProtectedComponent, kita tetap harus menggunakan useEffect
+// Agar terlepas dari Warning yang diberikan
+// (useNavigate harus di dalam useEffect)
+import React, { useEffect } from "react";
 
 // Di sini kita akan akan menggunakan hooks:
 // - untuk mendeteksi user sudah login (useAuthState)
@@ -15,21 +18,28 @@ const ProtectedComponent = ({ children }) => {
   const navigate = useNavigate();
 
   // Karena di sini kita hanya mengecek dari user, kita hanya gunakan [user] saja
-  const [user] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
-  // Di sini kita akan membuat logic, apabila user tidak ada (null), maka akan kita
-  // "paksa" ke halaman login
-  if (!user) {
-    navigate("/login");
+  useEffect(() => {
+    // Di sini kita akan membuat logic, apabila user tidak ada (null), maka akan kita
+    // "paksa" ke halaman login
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+  }, [user, navigate]);
 
-    // Apabila tidak ada return kosong, maka akan terkena FOUC
-    // Flash Of Unstyled Component
-    // (Intinya halaman children akan terender sebentar - flashing)
+  // Apabila kondisinya masih dalam tahap loading, kita berikan halaman kosong
+  if (isLoading) {
     return;
+  } else {
+    // Bila tidak isLoading (berarti sudah selesai)
+    // Kita kembalikan children yang ingin dirender
+    return children;
   }
 
-  // Apabila semua baik baik saja, kita akan mengembalikan children
-  return children;
+  // // Apabila semua baik baik saja, kita akan mengembalikan children
+  // return isLoading ? "" : children;
 };
 
 export default ProtectedComponent;
