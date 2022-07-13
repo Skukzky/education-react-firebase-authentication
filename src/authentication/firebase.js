@@ -1,5 +1,5 @@
 // Di sini kita akan import beberapa fungsi dari package firebase
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 
 // Di sini kita akan import beberapa fungsi dari package firebase/auth
 // Firebase ini sebenarnya memungkinkan kita untuk bisa login dengan banyak sekali
@@ -12,19 +12,19 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 // Ini adalah konfigurasi yang di-copy dari halaman Firebase (SDK Setup and Configuration)
 // Kita pilih yang versi "config" saja
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBORhnaXiwgfOOIlM06UNqfcv5_FBgw6iY",
-  authDomain: "tainted-development.firebaseapp.com",
-  projectId: "tainted-development",
-  storageBucket: "tainted-development.appspot.com",
-  messagingSenderId: "672379756589",
-  appId: "1:672379756589:web:216c8b5c1ac64e036058a4",
+  apiKey: 'AIzaSyCbfMddUx-Xx2SOy5t0ltcsOIkmhFLrOiQ',
+  authDomain: 'dts2022-c23fb.firebaseapp.com',
+  projectId: 'dts2022-c23fb',
+  storageBucket: 'dts2022-c23fb.appspot.com',
+  messagingSenderId: '718693586204',
+  appId: '1:718693586204:web:f974b61e469750249216d9',
 };
 
 // Sekarang di sini kita akan membuat seluruh fungsi yang digunakan untuk melakukan Register / Login
@@ -43,20 +43,13 @@ const auth = getAuth(app);
 const registerDenganEmailDanPassword = async (email, password) => {
   // Dokumentasi: https://firebase.google.com/docs/auth/web/password-auth
   try {
-    const response = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const response = await createUserWithEmailAndPassword(auth, email, password);
 
     // Pada aturan firebase authentication
     // Setelah user selesai registrasi, maka secara otomatis akan melakukan Sign In
     // sehingga kita bisa mengecek apakah seseorang sudah berhasil masuk atau belum
 
-    console.log(
-      "User yang teregistrasi dan berhasil login adalah",
-      response.user
-    );
+    console.log('User yang teregistrasi dan berhasil login adalah', response.user);
   } catch (err) {
     console.log(err);
 
@@ -64,8 +57,8 @@ const registerDenganEmailDanPassword = async (email, password) => {
     // ada 2 property yang penting:
     // - code: error code dari firebase authentication ketika terjadi error
     // - message: error message dari firebase authentication ketika terjadi error
-    console.log("error code auth", err.code);
-    console.log("error message auth", err.message);
+    console.log('error code auth', err.code);
+    console.log('error message auth', err.message);
   }
 };
 
@@ -74,19 +67,15 @@ const registerDenganEmailDanPassword = async (email, password) => {
 const loginDenganEmailDanPassword = async (email, password) => {
   // Dokumentasi: https://firebase.google.com/docs/auth/web/password-auth#sign_in_a_user_with_an_email_address_and_password
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-    console.log("User yang berhasil login adalah", userCredential.user);
+    console.log('User yang berhasil login adalah', userCredential.user);
   } catch (err) {
     console.log(err);
 
     // Sama dengan register
-    console.log("error code auth", err.code);
-    console.log("error message auth", err.message);
+    console.log('error code auth', err.code);
+    console.log('error message auth', err.message);
   }
 };
 
@@ -96,7 +85,7 @@ const resetPassword = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
 
-    console.log("Password reset sudah dikirimkan");
+    console.log('Password reset sudah dikirimkan');
   } catch (err) {
     console.log(err);
   }
